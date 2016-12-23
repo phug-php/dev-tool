@@ -55,8 +55,9 @@ class Application extends ConsoleApplication
 
         $localPath = realpath($this->getWorkingDirectory()."/$fileName");
 
-        if ($localPath)
+        if ($localPath) {
             return $localPath;
+        }
 
         return $this->getConfigDirectory()."/$fileName";
     }
@@ -97,13 +98,15 @@ class Application extends ConsoleApplication
         $commandPath = $cwd."/$command";
 
         //Check if there is a windows batch file equivalent for composer commands
-        if (($batPath = realpath("$commandPath.bat")))
+        if (($batPath = realpath("$commandPath.bat"))) {
             $commandPath = $batPath;
+        }
 
-        if (!($commandPath = realpath($commandPath)))
+        if (!($commandPath = realpath($commandPath))) {
             throw new RuntimeException(
                 "The given command [$command] was not found"
             );
+        }
 
         return $commandPath;
     }
@@ -115,9 +118,9 @@ class Application extends ConsoleApplication
         $parts = [escapeshellcmd($this->getShellCommandPath($command))];
 
         foreach ($arguments as $key => $arg) {
-
-            if (!is_int($key))
+            if (!is_int($key)) {
                 $arg = "$key=$arg";
+            }
 
             $parts[] = escapeshellarg($arg);
         }
@@ -141,6 +144,9 @@ class Application extends ConsoleApplication
     public function runCodeStyleChecker(array $arguments = null)
     {
 
+        $arguments = $arguments ?: [];
+
+        $arguments[] = '--colors';
         return $this->runVendorCommand('phpcs', $arguments);
     }
 

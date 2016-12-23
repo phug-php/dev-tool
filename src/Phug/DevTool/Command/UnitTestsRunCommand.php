@@ -23,8 +23,7 @@ class UnitTestsRunCommand extends AbstractCommand
 
         $args = [
             '--verbose',
-            '--configuration' => $this->getApplication()->getConfigFilePath('phpunit.xml'),
-            '--bootstrap' => realpath($this->getApplication()->getWorkingDirectory().'/vendor/autoload.php')
+            '--configuration' => $this->getApplication()->getConfigFilePath('phpunit.xml')
         ];
 
         if ($input->getOption('coverage-text')) {

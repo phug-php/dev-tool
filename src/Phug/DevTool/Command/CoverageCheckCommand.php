@@ -30,7 +30,6 @@ class CoverageCheckCommand extends AbstractCommand
         $requiredCoverage = intval($input->getOption('required-coverage'));
 
         if (!$xmlFile) {
-
             $output->writeln('<fg=red>Error: Code coverage files not found. Please run `unit-tests:run`.</>');
             return 1;
         }
@@ -43,7 +42,6 @@ class CoverageCheckCommand extends AbstractCommand
         $checkedElements = 0;
 
         foreach ($metrics as $metric) {
-
             $totalElements   += (int)$metric['elements'];
             $checkedElements += (int)$metric['coveredelements'];
         }
@@ -51,7 +49,6 @@ class CoverageCheckCommand extends AbstractCommand
         $coverage = ($checkedElements / $totalElements) * 100;
 
         if ($coverage < $requiredCoverage) {
-
             $output->writeln(
                 "<fg=red>Fail: Code coverage is {$coverage}%. "
                 ."You need to reach {$requiredCoverage}% to validate this build.</>"

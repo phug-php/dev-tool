@@ -12,14 +12,15 @@ class InstallCommand extends AbstractCommand
     {
         $this->setName('install')
             ->setDescription('Updates and installs composer dependencies.')
-            ->setHelp('pdates and installs composer dependencies');
+            ->setHelp('Updates and installs composer dependencies');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        if ($code = $this->getApplication()->runShellCommand('composer', ['self-update']))
+        if ($code = $this->getApplication()->runShellCommand('composer', ['self-update'])) {
             return $code;
+        }
 
         return $this->getApplication()->runShellCommand('composer', ['install']);
     }

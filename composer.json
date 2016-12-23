@@ -1,7 +1,10 @@
 {
     "name": "phug/dev-tool",
     "type": "library",
-    "keywords": ["phug", "dev tools", "template", "dialect", "html", "views", "render", "presentation", "jade", "pug", "html", "php", "phtml"],
+    "keywords": [
+        "phug", "dev tools", "template", "dialect", "html", "views",
+        "render", "presentation", "jade", "pug", "html", "php", "phtml"
+    ],
     "description": "",
     "license": "MIT",
     "homepage": "http://phug-lang.com",
@@ -13,8 +16,8 @@
     ],
     "support": {
         "email": "support@phug-lang.com",
-        "issues": "https://github.com/phug-php/util/issues",
-        "source": "https://github.com/phug-php/util",
+        "issues": "https://github.com/phug-php/dev-tool/issues",
+        "source": "https://github.com/phug-php/dev-tool",
         "docs": "http://phug-lang.com/docs"
     },
     "minimum-stability": "dev",

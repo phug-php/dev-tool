@@ -27,26 +27,33 @@ class CheckCommand extends AbstractCommand
         if (($code = $app->runCommand('unit-tests:run', $output, [
             '--coverage-text' => true,
             '--coverage-clover' => $coverageFilePath
-        ])) !== 0)
+        ])) !== 0) {
             return $code;
+        }
 
         if (($code = $app->runCommand('coverage:check', $output, [
-            'input-file' => $coverageFilePath
-        ])) !== 0)
+            '--input-file' => $coverageFilePath
+        ])) !== 0) {
             return $code;
+        }
 
         if ($input->getOption('report')) {
             if (($code = $app->runCommand('coverage:report', $output, [
-                'input-file' => $coverageFilePath
-            ])) !== 0)
+                '--input-file' => $coverageFilePath
+            ])) !== 0) {
                 return $code;
+            }
         }
 
-        if (($code = $app->runCommand('code-style:check', $output)) !== 0)
+        if (($code = $app->runCommand('code-style:check', $output, [
+                '--no-interaction'
+            ])) !== 0) {
             return $code;
+        }
 
-        if (file_exists($coverageFilePath))
+        if (file_exists($coverageFilePath)) {
             unlink($coverageFilePath);
+        }
 
         return 0;
     }

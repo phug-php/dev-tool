@@ -1,8 +1,18 @@
-#!/bin/php
+#!/usr/bin/env php
 <?php
 
 use Phug\DevTool\Application;
 
-require dirname(__DIR__).'/vendor/autoload.php';
+//Check for autoload file
+$cwd = getcwd();
+$path = "$cwd/vendor/autoload.php";
+if (file_exists($path)) {
+
+    require $path;
+} else {
+
+    echo "Composer's autoload.php not found in $cwd.";
+    exit(1);
+}
 
 (new Application)->run();
