@@ -32,14 +32,14 @@ class CheckCommand extends AbstractCommand
         }
 
         if (($code = $app->runCommand('coverage:check', $output, [
-            '--input-file' => $coverageFilePath
+            'input-file' => $coverageFilePath
         ])) !== 0) {
             return $code;
         }
 
         if ($input->getOption('report')) {
             if (($code = $app->runCommand('coverage:report', $output, [
-                '--input-file' => $coverageFilePath
+                'input-file' => $coverageFilePath
             ])) !== 0) {
                 return $code;
             }
