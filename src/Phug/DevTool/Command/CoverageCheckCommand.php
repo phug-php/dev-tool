@@ -26,7 +26,7 @@ class CoverageCheckCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $xmlFile = realpath($input->getOption('input-file'));
+        $xmlFile = realpath($input->getArgument('input-file'));
         $requiredCoverage = intval($input->getOption('required-coverage'));
 
         if (!$xmlFile) {
