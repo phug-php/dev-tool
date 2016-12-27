@@ -13,13 +13,4 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class AbstractCommand extends Command
 {
-    protected function configure()
-    {
-        parent::configure();
-    }
-
-    public function run(InputInterface $input, OutputInterface $output)
-    {
-        return parent::run($input, $output);
-    }
 }

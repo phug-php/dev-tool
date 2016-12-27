@@ -15,7 +15,11 @@ install:
     - php bin/phug-dev install
 
 script:
-    - php bin/phug-dev code-style:check
+    - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml && php bin/phug-dev code-style:check
 
 notifications:
     slack: phug:nzXFnxhU14RWK2EQSDL0u08z
+
+addons:
+    code_climate:
+        repo_token: e6c2d122be93cd3065c503a130e4203e4359fc0a67ab0a72b971f4c94f617cd8

@@ -29,7 +29,7 @@ class CheckCommand extends AbstractCommand
             return $code;
         }
 
-        if (!defined('HHVM_VERSION')) {
+        if (!$app->isHhvm()) {
             if (($code = $app->runCommand('coverage:check', $output, [
                 'input-file' => $coverageFilePath,
             ])) !== 0) {
@@ -45,7 +45,7 @@ class CheckCommand extends AbstractCommand
             }
         }
 
-        if (($code = $app->runCommand('code-style:check', $output, [
+        if (version_compare(PHP_VERSION, '5.6.0') >= 0 && ($code = $app->runCommand('code-style:check', $output, [
                 '--no-interaction',
             ])) !== 0) {
             return $code;

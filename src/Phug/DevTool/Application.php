@@ -40,20 +40,20 @@ class Application extends ConsoleApplication
         return getcwd();
     }
 
-    public function getConfigDirectory()
+    protected function getConfigDirectory()
     {
         return realpath(__DIR__.'/../../../config');
     }
 
     public function getConfigFilePath($fileName)
     {
-        $localPath = realpath($this->getWorkingDirectory()."/$fileName");
+        $localPath = realpath($this->getWorkingDirectory().DIRECTORY_SEPARATOR.$fileName);
 
         if ($localPath) {
             return $localPath;
         }
 
-        return $this->getConfigDirectory()."/$fileName";
+        return $this->getConfigDirectory().DIRECTORY_SEPARATOR.$fileName;
     }
 
     public function isWindows()
@@ -81,7 +81,7 @@ class Application extends ConsoleApplication
         return $command->run(new ArrayInput($arguments), $output);
     }
 
-    public function getShellCommandPath($command)
+    protected function getShellCommandPath($command)
     {
         $cwd = $this->getWorkingDirectory();
         $commandPath = $cwd."/$command";
