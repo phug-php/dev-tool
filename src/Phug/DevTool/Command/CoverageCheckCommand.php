@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CoverageCheckCommand extends AbstractCommand
 {
-
     const DEFAULT_REQUIRED_COVERAGE = 80;
 
     protected function configure()
@@ -25,12 +24,12 @@ class CoverageCheckCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $xmlFile = realpath($input->getArgument('input-file'));
         $requiredCoverage = intval($input->getOption('required-coverage'));
 
         if (!$xmlFile) {
             $output->writeln('<fg=red>Error: Code coverage files not found. Please run `unit-tests:run`.</>');
+
             return 1;
         }
 
@@ -42,8 +41,8 @@ class CoverageCheckCommand extends AbstractCommand
         $checkedElements = 0;
 
         foreach ($metrics as $metric) {
-            $totalElements   += (int)$metric['elements'];
-            $checkedElements += (int)$metric['coveredelements'];
+            $totalElements += (int) $metric['elements'];
+            $checkedElements += (int) $metric['coveredelements'];
         }
 
         $coverage = ($checkedElements / $totalElements) * 100;

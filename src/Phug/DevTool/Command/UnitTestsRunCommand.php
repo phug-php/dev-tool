@@ -20,10 +20,9 @@ class UnitTestsRunCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $args = [
             '--verbose',
-            '--configuration' => $this->getApplication()->getConfigFilePath('phpunit.xml')
+            '--configuration' => $this->getApplication()->getConfigFilePath('phpunit.xml'),
         ];
 
         if ($input->getOption('coverage-text')) {

@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckCommand extends AbstractCommand
 {
-
     protected function configure()
     {
         $this->setName('check')
@@ -20,27 +19,26 @@ class CheckCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $app = $this->getApplication();
         $coverageFilePath = $app->getWorkingDirectory().'/coverage.xml';
 
         if (($code = $app->runCommand('unit-tests:run', $output, [
             '--coverage-text' => true,
-            '--coverage-clover' => $coverageFilePath
+            '--coverage-clover' => $coverageFilePath,
         ])) !== 0) {
             return $code;
         }
 
         if (!defined('HHVM_VERSION')) {
             if (($code = $app->runCommand('coverage:check', $output, [
-                'input-file' => $coverageFilePath
+                'input-file' => $coverageFilePath,
             ])) !== 0) {
                 return $code;
             }
 
             if ($input->getOption('report')) {
                 if (($code = $app->runCommand('coverage:report', $output, [
-                    'input-file' => $coverageFilePath
+                    'input-file' => $coverageFilePath,
                 ])) !== 0) {
                     return $code;
                 }
@@ -48,7 +46,7 @@ class CheckCommand extends AbstractCommand
         }
 
         if (($code = $app->runCommand('code-style:check', $output, [
-                '--no-interaction'
+                '--no-interaction',
             ])) !== 0) {
             return $code;
         }
