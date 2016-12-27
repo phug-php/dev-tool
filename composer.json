@@ -31,9 +31,7 @@
         "phpunit/phpunit": ">=4.0",
         "phpunit/php-code-coverage": ">=2.2",
         "squizlabs/php_codesniffer": "2.*",
-        "symfony/console": "^3.2"
-    },
-    "require-dev": {
+        "symfony/console": "^3.2",
         "codeclimate/php-test-reporter": "@dev"
     },
     "autoload": {
