@@ -2,13 +2,14 @@
 
 namespace Phug\Test\DevTool;
 
+use Phug\DevTool\Application;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Phug\DevTool\Application;
 
 /**
  * Class ApplicationTest.
+ *
  * @coversDefaultClass \Phug\DevTool\Application
  */
 class ApplicationTest extends \PHPUnit_Framework_TestCase
