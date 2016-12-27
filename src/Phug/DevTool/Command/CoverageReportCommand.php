@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CoverageReportCommand extends AbstractCommand
 {
-
     protected function configure()
     {
         $this->setName('coverage:report')
@@ -20,11 +19,10 @@ class CoverageReportCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $xmlFile = realpath($input->getArgument('input-file'));
 
         $this->getApplication()->runVendorCommand('test-reporter', [
-            "--coverage-report $xmlFile"
+            "--coverage-report $xmlFile",
         ]);
 
         return 0;

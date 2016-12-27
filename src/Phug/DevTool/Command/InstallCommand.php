@@ -17,7 +17,6 @@ class InstallCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $application = $this->getApplication();
 
         if ($code = $application->runShellCommand('composer', ['self-update'])) {

@@ -18,14 +18,13 @@ class CodeStyleCheckCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $helper = $this->getHelper('question');
         $args = [
-            '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml')
+            '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml'),
         ];
 
         if (($code = $this->getApplication()->runCodeStyleChecker($args)) === 0) {
-            $output->writeln("<fg=green>Code looks great. Go on!</>");
+            $output->writeln('<fg=green>Code looks great. Go on!</>');
 
             return $code;
         }
@@ -35,12 +34,13 @@ class CodeStyleCheckCommand extends AbstractCommand
             false
         ))
         ) {
-            $output->writeln("You can always fix code-style problems by running the [code-style:fix] command.");
+            $output->writeln('You can always fix code-style problems by running the [code-style:fix] command.');
+
             return $code;
         }
 
         $code = $this->getApplication()->runCommand('code-style:fix', $output);
-        $output->writeln("<fg=green>All fixable problems have been fixed.</>");
+        $output->writeln('<fg=green>All fixable problems have been fixed.</>');
 
         if (!$helper->ask($input, $output, new ConfirmationQuestion(
             'Do you want to run the code-style check again? [Y/N, Default: N] ',
@@ -50,15 +50,14 @@ class CodeStyleCheckCommand extends AbstractCommand
             return $code;
         }
 
-
         if (($code = $this->getApplication()->runCodeStyleChecker($args)) === 0) {
-            $output->writeln("<fg=green>Code looks great. Go on!</>");
+            $output->writeln('<fg=green>Code looks great. Go on!</>');
 
             return $code;
         }
 
         $output->writeln(
-            "<fg=yellow>Code-style not optimal. "
+            '<fg=yellow>Code-style not optimal. '
             ."These problems can't be fixed by [code-style:fix]. Fix them yourself.</>"
         );
 

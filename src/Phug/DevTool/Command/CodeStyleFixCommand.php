@@ -17,9 +17,8 @@ class CodeStyleFixCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $args = [
-            '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml')
+            '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml'),
         ];
 
         return $this->getApplication()->runCodeStyleFixer($args);
