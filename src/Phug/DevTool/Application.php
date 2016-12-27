@@ -115,7 +115,7 @@ class Application extends ConsoleApplication
     {
 
         $arguments = $arguments ?: [];
-        $parts = [escapeshellcmd($this->getShellCommandPath($command))];
+        $parts = [escapeshellcmd($command)];
 
         foreach ($arguments as $key => $arg) {
             if (!is_int($key)) {
@@ -126,13 +126,14 @@ class Application extends ConsoleApplication
         }
 
         passthru(implode(' ', $parts), $returnCode);
+
         return is_numeric($returnCode) ? intval($returnCode) : $returnCode;
     }
 
     public function runVendorCommand($name, array $arguments = null)
     {
 
-        return $this->runShellCommand("vendor/bin/$name", $arguments);
+        return $this->runShellCommand($this->getShellCommandPath("vendor/bin/$name"), $arguments);
     }
 
     public function runUnitTests(array $arguments = null)
@@ -147,6 +148,7 @@ class Application extends ConsoleApplication
         $arguments = $arguments ?: [];
 
         $arguments[] = '--colors';
+
         return $this->runVendorCommand('phpcs', $arguments);
     }
 
