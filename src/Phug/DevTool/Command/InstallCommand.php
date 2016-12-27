@@ -24,6 +24,7 @@ class InstallCommand extends AbstractCommand
         }
 
         if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+            $app->runShellCommand('composer', ['remove', 'phpunit/php-code-coverage']);
             $app->runShellCommand('composer', ['require', 'phpunit/phpunit:^4.8']);
         }
 
