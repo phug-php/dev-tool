@@ -18,10 +18,14 @@ class InstallCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        if ($code = $this->getApplication()->runShellCommand('composer', ['self-update'])) {
+        $application = $this->getApplication();
+
+        if ($code = $application->runShellCommand('composer', ['self-update'])) {
             return $code;
         }
 
-        return $this->getApplication()->runShellCommand('composer', ['install']);
+        $application->runShellCommand('composer', ['require', 'codeclimate/php-test-reporter:@dev', '--dev']);
+
+        return $application->runShellCommand('composer', ['install']);
     }
 }

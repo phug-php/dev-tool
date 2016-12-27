@@ -31,17 +31,19 @@ class CheckCommand extends AbstractCommand
             return $code;
         }
 
-        if (($code = $app->runCommand('coverage:check', $output, [
-            'input-file' => $coverageFilePath
-        ])) !== 0) {
-            return $code;
-        }
-
-        if ($input->getOption('report')) {
-            if (($code = $app->runCommand('coverage:report', $output, [
+        if (!defined('HHVM_VERSION')) {
+            if (($code = $app->runCommand('coverage:check', $output, [
                 'input-file' => $coverageFilePath
             ])) !== 0) {
                 return $code;
+            }
+
+            if ($input->getOption('report')) {
+                if (($code = $app->runCommand('coverage:report', $output, [
+                    'input-file' => $coverageFilePath
+                ])) !== 0) {
+                    return $code;
+                }
             }
         }
 
