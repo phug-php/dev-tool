@@ -11,7 +11,12 @@ php:
     - 7.1
     - hhvm
 
+after_script:
+    - vendor/bin/test-reporter --coverage-report coverage.xml
+
 install:
+    - travis_retry composer self-update
+    - travis_retry composer install --no-interaction --prefer-source --dev
     - php bin/phug-dev install
 
 script:
