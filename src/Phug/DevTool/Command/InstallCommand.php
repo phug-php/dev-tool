@@ -23,8 +23,6 @@ class InstallCommand extends AbstractCommand
             return $code;
         }
 
-        $app->runShellCommand('composer', ['require', 'codeclimate/php-test-reporter:@dev', '--dev']);
-
         return $app->runShellCommand('composer', ['install']);
     }
 }

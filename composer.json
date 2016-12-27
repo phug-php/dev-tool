@@ -33,6 +33,9 @@
         "squizlabs/php_codesniffer": "2.*",
         "symfony/console": "^3.2"
     },
+    "require-dev": {
+        "codeclimate/php-test-reporter": "@dev"
+    },
     "autoload": {
         "psr-4": {
             "": "./src"

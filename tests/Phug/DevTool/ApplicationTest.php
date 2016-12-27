@@ -155,7 +155,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Application();
 
-        self::expectOutputRegex('/^Code Climate PHP Test Reporter/');
+        self::expectOutputRegex('/Code Climate PHP Test Reporter/');
         self::assertSame(0, $app->runCoverageReporter(['--version']));
     }
 
