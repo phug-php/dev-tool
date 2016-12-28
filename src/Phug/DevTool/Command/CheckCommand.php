@@ -17,19 +17,10 @@ class CheckCommand extends AbstractCommand
             ->setHelp('Runs all necessary checks');
     }
 
-    protected function cleanUpFile($file)
-    {
-        if (file_exists($file)) {
-            unlink($file);
-        }
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getApplication();
         $coverageFilePath = $app->getWorkingDirectory().'/coverage.xml';
-
-        $this->cleanUpFile($file);
 
         $unitTestsCode = $app->runCommand('unit-tests:run', $output, [
             '--coverage-text'   => true,
@@ -55,7 +46,9 @@ class CheckCommand extends AbstractCommand
             ]);
         }
 
-        $this->cleanUpFile($file);
+        if (file_exists($coverageFilePath)) {
+            unlink($coverageFilePath);
+        }
 
         return $unitTestsCode ?: $coverageCode ?: $codeStyleCode;
     }

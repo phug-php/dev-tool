@@ -25,7 +25,6 @@ class CheckCommandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::cleanUpFile
      * @covers ::execute
      */
     public function testExecute()
