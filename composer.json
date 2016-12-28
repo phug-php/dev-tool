@@ -32,7 +32,7 @@
         "phpunit/php-code-coverage": ">=2.2",
         "squizlabs/php_codesniffer": "2.*",
         "symfony/console": "^3.2",
-        "codeclimate/php-test-reporter": "@dev"
+        "kylekatarnls-codeclimate/php-test-reporter": "^0.3.4"
     },
     "autoload": {
         "psr-4": {
