@@ -22,40 +22,34 @@ class CheckCommand extends AbstractCommand
         $app = $this->getApplication();
         $coverageFilePath = $app->getWorkingDirectory().'/coverage.xml';
 
-        if (($code = $app->runCommand('unit-tests:run', $output, [
+        $unitTestsCode = $app->runCommand('unit-tests:run', $output, [
             '--coverage-text' => true,
             '--coverage-clover' => $coverageFilePath,
-        ])) !== 0) {
-            return $code;
-        }
+        ]);
 
         if (!$app->isHhvm()) {
-            if (($code = $app->runCommand('coverage:check', $output, [
+            $coverageCode = $app->runCommand('coverage:check', $output, [
                 'input-file' => $coverageFilePath,
-            ])) !== 0) {
-                return $code;
-            }
+            ]);
 
-            if ($input->getOption('report')) {
-                if (($code = $app->runCommand('coverage:report', $output, [
+            if ($coverageCode === 0 && $input->getOption('report')) {
+                $coverageCode = $app->runCommand('coverage:report', $output, [
                     'input-file' => $coverageFilePath,
                     '--php-version', '5.6',
-                ])) !== 0) {
-                    return $code;
-                }
+                ]);
             }
         }
 
-        if (version_compare(PHP_VERSION, '5.6.0') >= 0 && ($code = $app->runCommand('code-style:check', $output, [
+        if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
+            $codeStyleCode = $app->runCommand('code-style:check', $output, [
                 '--no-interaction',
-            ])) !== 0) {
-            return $code;
+            ]);
         }
 
         if (file_exists($coverageFilePath)) {
             unlink($coverageFilePath);
         }
 
-        return 0;
+        return $unitTestsCode ?: $coverageCode ?: $codeStyleCode;
     }
 }
