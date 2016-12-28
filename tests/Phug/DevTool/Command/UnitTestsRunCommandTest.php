@@ -12,8 +12,8 @@ use Phug\DevTool\Command\UnitTestsRunCommand;
 class UnitTestsRunCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers ::configure
-    */
+     * @covers ::configure
+     */
     public function testConfigure()
     {
         $unitTests = new UnitTestsRunCommand();

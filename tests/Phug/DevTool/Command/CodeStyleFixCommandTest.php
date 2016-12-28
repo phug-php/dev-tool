@@ -12,8 +12,8 @@ use Phug\DevTool\Command\CodeStyleFixCommand;
 class CodeStyleFixCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers ::configure
-    */
+     * @covers ::configure
+     */
     public function testConfigure()
     {
         $codeStyleFix = new CodeStyleFixCommand();

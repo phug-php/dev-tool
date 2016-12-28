@@ -12,8 +12,8 @@ use Phug\DevTool\Command\CoverageReportCommand;
 class CoverageReportCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers ::configure
-    */
+     * @covers ::configure
+     */
     public function testConfigure()
     {
         $coverageReport = new CoverageReportCommand();

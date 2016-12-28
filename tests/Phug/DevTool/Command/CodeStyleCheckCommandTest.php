@@ -12,8 +12,8 @@ use Phug\DevTool\Command\CodeStyleCheckCommand;
 class CodeStyleCheckCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers ::configure
-    */
+     * @covers ::configure
+     */
     public function testConfigure()
     {
         $codeStyleCheck = new CodeStyleCheckCommand();

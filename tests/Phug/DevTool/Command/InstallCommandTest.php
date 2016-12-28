@@ -12,8 +12,8 @@ use Phug\DevTool\Command\InstallCommand;
 class InstallCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers ::configure
-    */
+     * @covers ::configure
+     */
     public function testConfigure()
     {
         $install = new InstallCommand();
