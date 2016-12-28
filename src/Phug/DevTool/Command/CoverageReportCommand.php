@@ -34,11 +34,18 @@ class CoverageReportCommand extends AbstractCommand
 
         $phpVersion = $input->getOption('php-version');
 
-        if (empty($phpVersion) || preg_match('/^'.preg_quote($phpVersion).'(\D.*)?$/', PHP_VERSION)) {
-            $this->getApplication()->runVendorCommand('test-reporter', [
-                "--coverage-report $xmlFile",
-            ]);
+        if (!empty($phpVersion)) {
+            if (!preg_match('/^'.preg_quote($phpVersion).'(\D.*)?$/', PHP_VERSION)) {
+                $output->writeln('Test report ignored since PHP version ('.PHP_VERSION.') does not match '.$phpVersion.'.');
+
+                return 0;
+            }
+            $output->writeln('<fg=green>Proceed test report since PHP version ('.PHP_VERSION.') matches '.$phpVersion.'.</>');
         }
+
+        $this->getApplication()->runVendorCommand('test-reporter', [
+            "--coverage-report $xmlFile",
+        ]);
 
         return 0;
     }
