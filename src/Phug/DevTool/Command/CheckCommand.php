@@ -32,19 +32,19 @@ class CheckCommand extends AbstractCommand
         $this->cleanUpFile($file);
 
         $unitTestsCode = $app->runCommand('unit-tests:run', $output, [
-            '--coverage-text' => true,
+            '--coverage-text'   => true,
             '--coverage-clover' => $coverageFilePath,
         ]);
 
-        if (file_exists($coverageFilePath) && !$app->isHhvm()) {
+        if (!$app->isHhvm()) {
             $coverageCode = $app->runCommand('coverage:check', $output, [
                 'input-file' => $coverageFilePath,
             ]);
 
             if ($coverageCode === 0 && $input->getOption('report')) {
                 $coverageCode = $app->runCommand('coverage:report', $output, [
-                    'input-file' => $coverageFilePath,
-                    '--php-version', '5.6',
+                    'input-file'    => $coverageFilePath,
+                    '--php-version' => '5.6',
                 ]);
             }
         }
