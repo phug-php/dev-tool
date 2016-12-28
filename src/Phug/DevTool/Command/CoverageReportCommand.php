@@ -50,7 +50,7 @@ class CoverageReportCommand extends AbstractCommand
         }
 
         $this->getApplication()->runVendorCommand('test-reporter', [
-            "--coverage-report $xmlFile",
+            '--coverage-report' => $xmlFile,
         ]);
 
         return 0;
