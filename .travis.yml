@@ -12,6 +12,7 @@ php:
     - hhvm
 
 after_script:
+    - php bin/phug-dev code-style:check
     - vendor/bin/test-reporter --coverage-report coverage.xml
 
 install:
@@ -20,7 +21,7 @@ install:
     - php bin/phug-dev install
 
 script:
-    - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml && php bin/phug-dev code-style:check
+    - ./vendor/bin/phpunit --verbose --coverage-text --coverage-clover=coverage.xml
 
 notifications:
     slack: phug:nzXFnxhU14RWK2EQSDL0u08z
