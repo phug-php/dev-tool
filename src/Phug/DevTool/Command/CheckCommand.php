@@ -17,17 +17,26 @@ class CheckCommand extends AbstractCommand
             ->setHelp('Runs all necessary checks');
     }
 
+    protected function cleanUpFile($file)
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getApplication();
         $coverageFilePath = $app->getWorkingDirectory().'/coverage.xml';
+
+        $this->cleanUpFile($file);
 
         $unitTestsCode = $app->runCommand('unit-tests:run', $output, [
             '--coverage-text' => true,
             '--coverage-clover' => $coverageFilePath,
         ]);
 
-        if (!$app->isHhvm()) {
+        if (file_exists($coverageFilePath) && !$app->isHhvm()) {
             $coverageCode = $app->runCommand('coverage:check', $output, [
                 'input-file' => $coverageFilePath,
             ]);
@@ -46,9 +55,7 @@ class CheckCommand extends AbstractCommand
             ]);
         }
 
-        if (file_exists($coverageFilePath)) {
-            unlink($coverageFilePath);
-        }
+        $this->cleanUpFile($file);
 
         return $unitTestsCode ?: $coverageCode ?: $codeStyleCode;
     }
