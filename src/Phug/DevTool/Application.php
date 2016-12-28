@@ -87,7 +87,7 @@ class Application extends ConsoleApplication
         $commandPath = $cwd."/$command";
 
         //Check if there is a windows batch file equivalent for composer commands
-        if (($batPath = realpath("$commandPath.bat"))) {
+        if ($this->isWindows() && ($batPath = realpath("$commandPath.bat"))) {
             $commandPath = $batPath;
         }
 

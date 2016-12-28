@@ -115,6 +115,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::getShellCommandPath
+     */
+    public function testWindowsBatPath()
+    {
+        $app = new WindowsApplicationTest();
+        self::assertSame(realpath(__DIR__.'/../../../vendor/bin/phpcs.bat'), $app->getPhpcsPath());
+    }
+
+    /**
      * @covers ::runUnitTests
      */
     public function testRunUnitTests()
