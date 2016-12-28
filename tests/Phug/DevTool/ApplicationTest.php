@@ -182,7 +182,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testRun()
     {
-        $input = new StringInput('code-style:check');
+        $input = new StringInput('code-style:check -n');
         $buffer = new BufferedOutput();
         $app = new Application();
         $app->setAutoExit(false);

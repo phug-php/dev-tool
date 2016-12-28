@@ -13,9 +13,17 @@ class CoverageReportCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('coverage:report')
-            ->addArgument('input-file', InputArgument::REQUIRED, 'The XML file to report coverage from')
-            ->addOption('php-version', null, InputOption::VALUE_OPTIONAL)
-            ->addArgument('php-version', InputArgument::OPTIONAL, 'If specified, the report is only send for the given PHP version')
+            ->addArgument(
+                'input-file',
+                InputArgument::REQUIRED,
+                'The XML file to report coverage from'
+            )
+            ->addOption(
+                'php-version',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'If specified, the report is only send for the given PHP version'
+            )
             ->setDescription('Reports coverage.')
             ->setHelp('This command reports coverage');
     }
