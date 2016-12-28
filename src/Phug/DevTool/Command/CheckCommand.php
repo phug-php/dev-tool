@@ -39,6 +39,7 @@ class CheckCommand extends AbstractCommand
             if ($input->getOption('report')) {
                 if (($code = $app->runCommand('coverage:report', $output, [
                     'input-file' => $coverageFilePath,
+                    'php-version' => '5.6',
                 ])) !== 0) {
                     return $code;
                 }

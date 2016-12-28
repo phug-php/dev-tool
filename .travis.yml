@@ -13,7 +13,7 @@ php:
 
 after_script:
     - php bin/phug-dev code-style:check
-    - vendor/bin/test-reporter --coverage-report coverage.xml
+    - php bin/phug-dev coverage:report coverage.xml --php-version=5.6
 
 install:
     - travis_retry composer self-update
