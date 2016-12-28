@@ -31,6 +31,9 @@ class CheckCommandTest extends \PHPUnit_Framework_TestCase
     {
         $cwd = getcwd();
         chdir(__DIR__.'/../../../app');
+        foreach (glob(__DIR__.'/../../../app/vendor/bin/*') as $file) {
+            chmod($file, 0777);
+        }
         file_put_contents('coverage.xml', '<?xml version="1.0" encoding="UTF-8"?>
         <coverage generated="1482856255">
             <project timestamp="1482856255">
