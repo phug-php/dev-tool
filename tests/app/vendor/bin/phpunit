@@ -1,1 +1,12 @@
-#!/usr/bin/env sh
+#!/usr/bin/env php
+<?php
+$args = array();
+foreach ($argv as $arg) {
+    $arg = explode('=', $arg);
+    $key = $arg[0];
+    $value = isset($arg[1]) ? $arg[1] : true;
+
+    $args[$key] = $value;
+}
+echo json_encode($args);
+?>
