@@ -13,6 +13,11 @@ class CheckCommand extends AbstractCommand
     {
         $this->setName('check')
             ->addOption('report', null, InputOption::VALUE_NONE)
+            ->addOption('coverage-text', null, InputOption::VALUE_NONE, 'Display coverage info?')
+            ->addOption('coverage-html', null, InputOption::VALUE_OPTIONAL, 'Save coverage info as HTML?', false)
+            ->addOption('coverage-clover', null, InputOption::VALUE_OPTIONAL, 'Save coverage info as XML?', false)
+            ->addOption('group', null, InputOption::VALUE_OPTIONAL, 'Excute only a tests group?', false)
+            ->addOption('ignore-tests', null, InputOption::VALUE_NONE)
             ->setDescription('Runs all necessary checks.')
             ->setHelp('Runs all necessary checks');
     }
@@ -22,10 +27,28 @@ class CheckCommand extends AbstractCommand
         $app = $this->getApplication();
         $coverageFilePath = $app->getWorkingDirectory().'/coverage.xml';
 
-        if (($code = $app->runCommand('unit-tests:run', $output, [
+        $args = [
             '--coverage-text' => true,
             '--coverage-clover' => $coverageFilePath,
-        ])) !== 0) {
+        ];
+
+        if ($input->getOption('coverage-text')) {
+            $args[] = '--coverage-text';
+        }
+
+        if ($path = $input->getOption('coverage-clover')) {
+            $args['--coverage-clover'] = $path;
+        }
+
+        if ($path = $input->getOption('coverage-html')) {
+            $args['--coverage-html'] = $path;
+        }
+
+        if ($group = $input->getOption('group')) {
+            $args['--group'] = $group;
+        }
+
+        if (($code = $app->runCommand('unit-tests:run', $output, $args)) !== 0) {
             return $code;
         }
 
@@ -48,6 +71,7 @@ class CheckCommand extends AbstractCommand
 
         if (version_compare(PHP_VERSION, '5.6.0') >= 0 && ($code = $app->runCommand('code-style:check', $output, [
                 '--no-interaction',
+                '--ignore-tests' => $input->getOption('ignore-tests'),
             ])) !== 0) {
             return $code;
         }

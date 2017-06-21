@@ -4,6 +4,7 @@ namespace Phug\DevTool\Command;
 
 use Phug\DevTool\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
@@ -12,6 +13,7 @@ class CodeStyleCheckCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('code-style:check')
+            ->addOption('ignore-tests', null, InputOption::VALUE_NONE)
             ->setDescription('Runs code style checker (phpcs).')
             ->setHelp('This command runs the code style checker');
     }
@@ -22,6 +24,9 @@ class CodeStyleCheckCommand extends AbstractCommand
         $args = [
             '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml'),
         ];
+        if ($input->getOption('ignore-tests')) {
+            $args[] = '--ignore=*/tests/*';
+        }
 
         if (($code = $this->getApplication()->runCodeStyleChecker($args)) === 0) {
             $output->writeln('<fg=green>Code looks great. Go on!</>');

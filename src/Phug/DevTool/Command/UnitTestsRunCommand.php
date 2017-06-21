@@ -13,7 +13,9 @@ class UnitTestsRunCommand extends AbstractCommand
     {
         $this->setName('unit-tests:run')
             ->addOption('coverage-text', null, InputOption::VALUE_NONE, 'Display coverage info?')
-            ->addOption('coverage-clover', null, InputOption::VALUE_OPTIONAL, 'Save coverage info?', false)
+            ->addOption('coverage-html', null, InputOption::VALUE_OPTIONAL, 'Save coverage info as HTML?', false)
+            ->addOption('coverage-clover', null, InputOption::VALUE_OPTIONAL, 'Save coverage info as XML?', false)
+            ->addOption('group', null, InputOption::VALUE_OPTIONAL, 'Excute only a tests group?', false)
             ->setDescription('Runs unit tests (phpunit).')
             ->setHelp('This command runs the unit tests');
     }
@@ -31,6 +33,14 @@ class UnitTestsRunCommand extends AbstractCommand
 
         if ($path = $input->getOption('coverage-clover')) {
             $args['--coverage-clover'] = $path;
+        }
+
+        if ($path = $input->getOption('coverage-html')) {
+            $args['--coverage-html'] = $path;
+        }
+
+        if ($group = $input->getOption('group')) {
+            $args['--group'] = $group;
         }
 
         return $this->getApplication()->runUnitTests($args);
