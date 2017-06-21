@@ -28,7 +28,7 @@ class CheckCommand extends AbstractCommand
         $coverageFilePath = $app->getWorkingDirectory().'/coverage.xml';
 
         $args = [
-            '--coverage-text' => true,
+            '--coverage-text'   => true,
             '--coverage-clover' => $coverageFilePath,
         ];
 

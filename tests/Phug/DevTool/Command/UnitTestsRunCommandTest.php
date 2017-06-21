@@ -26,6 +26,7 @@ class UnitTestsRunCommandTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
     /**
      * @covers ::configure
      */
