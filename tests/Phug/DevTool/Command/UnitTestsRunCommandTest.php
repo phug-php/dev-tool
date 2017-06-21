@@ -50,13 +50,11 @@ class UnitTestsRunCommandTest extends \PHPUnit_Framework_TestCase
         }
         $coverageHtml = $app.DIRECTORY_SEPARATOR.'coverage';
         $coverageClover = $app.DIRECTORY_SEPARATOR.'coverage.xml';
-        $coverageHtmlShellArg = escapeshellarg(addslashes($coverageHtml));
-        $coverageCloverShellArg = escapeshellarg(addslashes($coverageClover));
         $input = new StringInput(
             'unit-tests:run'.
             ' --coverage-text'.
-            ' --coverage-html='.$coverageHtmlShellArg.
-            ' --coverage-clover='.$coverageCloverShellArg
+            ' --coverage-html='.escapeshellarg(addslashes($coverageHtml)).
+            ' --coverage-clover='.escapeshellarg(addslashes($coverageClover))
         );
         $buffer = new NullOutput();
         $app = new Application();

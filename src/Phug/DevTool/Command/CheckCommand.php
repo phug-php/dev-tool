@@ -32,20 +32,17 @@ class CheckCommand extends AbstractCommand
             '--coverage-clover' => $coverageFilePath,
         ];
 
-        if ($input->getOption('coverage-text')) {
-            $args[] = '--coverage-text';
-        }
+        $passTrough = [
+            'coverage-text',
+            'coverage-clover',
+            'coverage-html',
+            'group',
+        ];
 
-        if ($path = $input->getOption('coverage-clover')) {
-            $args['--coverage-clover'] = $path;
-        }
-
-        if ($path = $input->getOption('coverage-html')) {
-            $args['--coverage-html'] = $path;
-        }
-
-        if ($group = $input->getOption('group')) {
-            $args['--group'] = $group;
+        foreach ($passTrough as $option) {
+            if ($value = $input->getOption($option)) {
+                $args[$option] = $value;
+            }
         }
 
         if (($code = $app->runCommand('unit-tests:run', $output, $args)) !== 0) {
