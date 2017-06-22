@@ -22,6 +22,26 @@ class CheckCommand extends AbstractCommand
             ->setHelp('Runs all necessary checks');
     }
 
+    protected function runCoverage(InputInterface $input, OutputInterface $output, $coverageFilePath)
+    {
+        $app = $this->getApplication();
+
+        if (($code = $app->runCommand('coverage:check', $output, [
+                'input-file' => $coverageFilePath,
+            ])) !== 0) {
+            return $code;
+        }
+
+        if ($input->getOption('report') && ($code = $app->runCommand('coverage:report', $output, [
+                'input-file' => $coverageFilePath,
+                '--php-version', '5.6',
+            ])) !== 0) {
+            return $code;
+        }
+
+        return 0;
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getApplication();
@@ -49,21 +69,8 @@ class CheckCommand extends AbstractCommand
             return $code;
         }
 
-        if (!$app->isHhvm()) {
-            if (($code = $app->runCommand('coverage:check', $output, [
-                'input-file' => $coverageFilePath,
-            ])) !== 0) {
-                return $code;
-            }
-
-            if ($input->getOption('report')) {
-                if (($code = $app->runCommand('coverage:report', $output, [
-                    'input-file' => $coverageFilePath,
-                    '--php-version', '5.6',
-                ])) !== 0) {
-                    return $code;
-                }
-            }
+        if (!$app->isHhvm() && ($code = $this->runCoverage($input, $output, $coverageFilePath))) {
+            return $code;
         }
 
         if (version_compare(PHP_VERSION, '5.6.0') >= 0 && ($code = $app->runCommand('code-style:check', $output, [
