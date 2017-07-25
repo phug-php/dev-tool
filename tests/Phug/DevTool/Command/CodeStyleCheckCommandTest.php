@@ -40,5 +40,17 @@ class CodeStyleCheckCommandTest extends \PHPUnit_Framework_TestCase
 
         self::assertSame(0, $code);
         self::assertRegExp('/Code looks great\. Go on!/', $buffer->fetch());
+
+        $cwd = getcwd();
+        chdir(__DIR__.'/../../../app');
+        $input = new StringInput('code-style:check --ignore-debug --ignore-tests');
+        $buffer = new BufferedOutput();
+        $app = new Application();
+        $app->setAutoExit(false);
+        $code = $app->run($input, $buffer);
+        chdir($cwd);
+
+        self::assertSame(0, $code);
+        self::assertRegExp('/Code looks great\. Go on!/', $buffer->fetch());
     }
 }

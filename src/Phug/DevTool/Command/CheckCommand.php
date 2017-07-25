@@ -12,12 +12,13 @@ class CheckCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('check')
-            ->addOption('report', null, InputOption::VALUE_NONE)
+            ->addOption('report', null, InputOption::VALUE_NONE, 'Send coverage report?')
             ->addOption('coverage-text', null, InputOption::VALUE_NONE, 'Display coverage info?')
             ->addOption('coverage-html', null, InputOption::VALUE_OPTIONAL, 'Save coverage info as HTML?', false)
             ->addOption('coverage-clover', null, InputOption::VALUE_OPTIONAL, 'Save coverage info as XML?', false)
             ->addOption('group', null, InputOption::VALUE_OPTIONAL, 'Excute only a tests group?', false)
-            ->addOption('ignore-tests', null, InputOption::VALUE_NONE)
+            ->addOption('ignore-tests', null, InputOption::VALUE_NONE, 'Ignore /tests/ directories')
+            ->addOption('ignore-debug', null, InputOption::VALUE_NONE, 'Ignore /debug/ directories')
             ->setDescription('Runs all necessary checks.')
             ->setHelp('Runs all necessary checks');
     }

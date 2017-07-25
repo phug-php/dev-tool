@@ -13,7 +13,8 @@ class CodeStyleCheckCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('code-style:check')
-            ->addOption('ignore-tests', null, InputOption::VALUE_NONE)
+            ->addOption('ignore-tests', null, InputOption::VALUE_NONE, 'Ignore /tests/ directories')
+            ->addOption('ignore-debug', null, InputOption::VALUE_NONE, 'Ignore /debug/ directories')
             ->setDescription('Runs code style checker (phpcs).')
             ->setHelp('This command runs the code style checker');
     }
@@ -24,8 +25,15 @@ class CodeStyleCheckCommand extends AbstractCommand
         $args = [
             '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml'),
         ];
+        $ignore = [];
         if ($input->getOption('ignore-tests')) {
-            $args[] = '--ignore=*/tests/*';
+            $ignore[] = '*/tests/*';
+        }
+        if ($input->getOption('ignore-debug')) {
+            $ignore[] = '*/debug/*';
+        }
+        if (count($ignore)) {
+            $args[] = '--ignore='.implode(',', $ignore);
         }
 
         if (($code = $this->getApplication()->runCodeStyleChecker($args)) === 0) {
