@@ -24,7 +24,7 @@ class CodeStyleCheckCommand extends AbstractCommand
         $helper = $this->getHelper('question');
         $args = [
             '--standard'   => $this->getApplication()->getConfigFilePath('phpcs.xml'),
-            '--extensions' => 'php'
+            '--extensions' => 'php',
         ];
         $ignore = [];
         if ($input->getOption('ignore-tests')) {
