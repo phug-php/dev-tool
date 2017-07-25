@@ -23,7 +23,8 @@ class CodeStyleCheckCommand extends AbstractCommand
     {
         $helper = $this->getHelper('question');
         $args = [
-            '--standard' => $this->getApplication()->getConfigFilePath('phpcs.xml'),
+            '--standard'   => $this->getApplication()->getConfigFilePath('phpcs.xml'),
+            '--extensions' => 'php'
         ];
         $ignore = [];
         if ($input->getOption('ignore-tests')) {
@@ -33,7 +34,7 @@ class CodeStyleCheckCommand extends AbstractCommand
             $ignore[] = '*/debug/*';
         }
         if (count($ignore)) {
-            $args[] = '--ignore='.implode(',', $ignore);
+            $args['--ignore'] = implode(',', $ignore);
         }
 
         if (($code = $this->getApplication()->runCodeStyleChecker($args)) === 0) {
