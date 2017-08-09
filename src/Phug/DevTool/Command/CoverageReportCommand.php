@@ -22,7 +22,7 @@ class CoverageReportCommand extends AbstractCommand
                 'php-version',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'If specified, the report is only send for the given PHP version'
+                'If specified, the report is only sent for the given PHP version'
             )
             ->setDescription('Reports coverage.')
             ->setHelp('This command reports coverage');
