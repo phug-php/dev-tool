@@ -12,7 +12,8 @@ class CheckCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('check')
-            ->addOption('report',
+            ->addOption(
+                'report',
                 null,
                 InputOption::VALUE_NONE,
                 'Send coverage report?'
