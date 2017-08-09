@@ -88,7 +88,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $app = new Application();
 
         self::assertSame(0, $app->runShellCommand('composer', ['--quiet']));
-        self::assertSame(0, $app->runShellCommand('composer', ['--quiet', '--verbose' => 2]));
+        self::assertSame(0, $app->runShellCommand('composer', ['--quiet', '--verbose', '--format' => 'xml']));
     }
 
     /**
