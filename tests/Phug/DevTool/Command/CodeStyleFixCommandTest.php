@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Command\CodeStyleFixCommand;
 
 /**
@@ -9,7 +10,7 @@ use Phug\DevTool\Command\CodeStyleFixCommand;
  *
  * @coversDefaultClass \Phug\DevTool\Command\CodeStyleFixCommand
  */
-class CodeStyleFixCommandTest extends \PHPUnit_Framework_TestCase
+class CodeStyleFixCommandTest extends TestCase
 {
     /**
      * @covers ::configure

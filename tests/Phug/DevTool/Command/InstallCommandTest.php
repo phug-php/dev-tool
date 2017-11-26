@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Command\InstallCommand;
 
 /**
@@ -9,7 +10,7 @@ use Phug\DevTool\Command\InstallCommand;
  *
  * @coversDefaultClass \Phug\DevTool\Command\InstallCommand
  */
-class InstallCommandTest extends \PHPUnit_Framework_TestCase
+class InstallCommandTest extends TestCase
 {
     /**
      * @covers ::configure

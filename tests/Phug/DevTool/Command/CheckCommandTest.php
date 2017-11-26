@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Application;
 use Phug\DevTool\Command\CheckCommand;
 use Symfony\Component\Console\Input\StringInput;
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
  *
  * @coversDefaultClass \Phug\DevTool\Command\CheckCommand
  */
-class CheckCommandTest extends \PHPUnit_Framework_TestCase
+class CheckCommandTest extends TestCase
 {
     /**
      * @covers ::configure

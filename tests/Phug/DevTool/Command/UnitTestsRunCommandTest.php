@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Application;
 use Phug\DevTool\Command\UnitTestsRunCommand;
 use Symfony\Component\Console\Input\StringInput;
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Output\NullOutput;
  *
  * @coversDefaultClass \Phug\DevTool\Command\UnitTestsRunCommand
  */
-class UnitTestsRunCommandTest extends \PHPUnit_Framework_TestCase
+class UnitTestsRunCommandTest extends TestCase
 {
     private static function remove($entity)
     {
