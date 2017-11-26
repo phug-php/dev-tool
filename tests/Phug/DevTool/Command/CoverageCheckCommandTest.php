@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Command\CoverageCheckCommand;
 
 /**
@@ -9,7 +10,7 @@ use Phug\DevTool\Command\CoverageCheckCommand;
  *
  * @coversDefaultClass \Phug\DevTool\Command\CoverageCheckCommand
  */
-class CoverageCheckCommandTest extends \PHPUnit_Framework_TestCase
+class CoverageCheckCommandTest extends TestCase
 {
     /**
      * @covers ::configure

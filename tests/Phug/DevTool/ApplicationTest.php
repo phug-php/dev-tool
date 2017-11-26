@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Application;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Input\StringInput;
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
  *
  * @coversDefaultClass \Phug\DevTool\Application
  */
-class ApplicationTest extends \PHPUnit_Framework_TestCase
+class ApplicationTest extends TestCase
 {
     /**
      * @covers ::__construct

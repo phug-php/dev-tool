@@ -28,7 +28,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.5.0",
-        "phpunit/phpunit": "^4.8 || ^5.7",
+        "phpunit/phpunit": "^4.8.35 || ^5.7",
         "phpunit/php-code-coverage": "^2.2 || ^4.0 || ^5.2",
         "squizlabs/php_codesniffer": "^2.8",
         "symfony/console": "^3.2",

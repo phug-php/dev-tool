@@ -2,6 +2,7 @@
 
 namespace Phug\Test\DevTool;
 
+use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Application;
 use Phug\DevTool\Command\CodeStyleCheckCommand;
 use Symfony\Component\Console\Input\StringInput;
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
  *
  * @coversDefaultClass \Phug\DevTool\Command\CodeStyleCheckCommand
  */
-class CodeStyleCheckCommandTest extends \PHPUnit_Framework_TestCase
+class CodeStyleCheckCommandTest extends TestCase
 {
     /**
      * @covers ::configure
