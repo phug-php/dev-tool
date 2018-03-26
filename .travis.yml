@@ -11,6 +11,12 @@ php:
     - 7.1
     - 7.2
 
+matrix:
+    include:
+        - php: hhvm-3.18
+          dist: trusty
+          sudo: required
+
 after_script:
     - php bin/phug-dev code-style:check
     - php bin/phug-dev coverage:report coverage.xml --php-version=5.6
