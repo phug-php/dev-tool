@@ -5,7 +5,7 @@
         "phug", "dev tools", "template", "dialect", "html", "views",
         "render", "presentation", "jade", "pug", "html", "php", "phtml"
     ],
-    "description": "",
+    "description": "Phug unit tests, coverage and code style tools",
     "license": "MIT",
     "homepage": "http://phug-lang.com",
     "authors": [
