@@ -6,13 +6,12 @@ use Phug\DevTool\Application;
 //Check for autoload file
 $cwd = getcwd();
 $path = "$cwd/vendor/autoload.php";
-if (file_exists($path)) {
 
-    require $path;
-} else {
-
+if (!file_exists($path)) {
     echo "Composer's autoload.php not found in $cwd.";
     exit(1);
 }
+
+require $path;
 
 (new Application)->run();
