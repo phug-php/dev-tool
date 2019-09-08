@@ -48,6 +48,6 @@ class CheckCommandTest extends TestCase
         }
         chdir($cwd);
 
-        self::assertStringContainsString('Error: Code coverage files not found. Please run `unit-tests:run`', $buffer->fetch());
+        self::assertTrue(strpos($buffer->fetch(), 'Error: Code coverage files not found. Please run `unit-tests:run`') !== false);
     }
 }
