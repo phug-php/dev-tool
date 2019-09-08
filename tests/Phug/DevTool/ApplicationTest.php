@@ -112,8 +112,11 @@ class ApplicationTest extends TestCase
      */
     public function testGetShellCommandPathException()
     {
-        self::expectException(RuntimeException::class);
-        self::expectExceptionMessage('The given command [vendor/bin/doNotExists] was not found');
+        if (method_exists(self::class, 'expectException')) {
+            self::expectException(RuntimeException::class);
+            self::expectExceptionMessage('The given command [vendor/bin/doNotExists] was not found');
+        }
+
         $app = new Application();
         $app->runVendorCommand('doNotExists');
     }
