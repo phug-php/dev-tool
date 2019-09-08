@@ -106,7 +106,9 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @covers ::getShellCommandPath
+     * @covers                   ::getShellCommandPath
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage The given command [vendor/bin/doNotExists] was not found
      */
     public function testGetShellCommandPathException()
     {
