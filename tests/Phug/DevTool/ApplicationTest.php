@@ -4,6 +4,7 @@ namespace Phug\Test\DevTool;
 
 use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Application;
+use RuntimeException;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -105,12 +106,12 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @covers                   ::getShellCommandPath
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage The given command [vendor/bin/doNotExists] was not found
+     * @covers ::getShellCommandPath
      */
     public function testGetShellCommandPathException()
     {
+        self::expectException(RuntimeException::class);
+        self::expectExceptionMessage('The given command [vendor/bin/doNotExists] was not found');
         $app = new Application();
         $app->runVendorCommand('doNotExists');
     }
@@ -165,17 +166,6 @@ class ApplicationTest extends TestCase
 
         self::expectOutputRegex('/^PHP_CodeSniffer version/');
         self::assertSame(0, $app->runCodeStyleFixer(['--version']));
-    }
-
-    /**
-     * @covers ::runCoverageReporter
-     */
-    public function testRunCoverageReporter()
-    {
-        $app = new Application();
-
-        self::expectOutputRegex('/Code Climate PHP Test Reporter/');
-        self::assertSame(0, $app->runCoverageReporter(['--version']));
     }
 
     /**

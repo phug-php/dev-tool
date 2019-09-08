@@ -7,6 +7,7 @@ use Phug\DevTool\Command\CodeStyleCheckCommand;
 use Phug\DevTool\Command\CodeStyleFixCommand;
 use Phug\DevTool\Command\CoverageCheckCommand;
 use Phug\DevTool\Command\CoverageReportCommand;
+use Phug\DevTool\Command\CoverageReportPrepareCommand;
 use Phug\DevTool\Command\InstallCommand;
 use Phug\DevTool\Command\UnitTestsRunCommand;
 use RuntimeException;
@@ -31,6 +32,7 @@ class Application extends ConsoleApplication
         $this->add(new CodeStyleFixCommand());
         $this->add(new CoverageCheckCommand());
         $this->add(new CoverageReportCommand());
+        $this->add(new CoverageReportPrepareCommand());
         $this->add(new InstallCommand());
         $this->add(new UnitTestsRunCommand());
     }
@@ -142,9 +144,36 @@ class Application extends ConsoleApplication
         return $this->runVendorCommand('phpcbf', $arguments);
     }
 
-    public function runCoverageReporter(array $arguments = null)
+    public function runCoverageReporterPreparation()
     {
-        return $this->runVendorCommand('test-reporter', $arguments);
+        $url = 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64';
+
+        return $this->runShellCommand(implode(' && ', [
+            "curl -L $url > ./cc-test-reporter",
+            'chmod +x ./cc-test-reporter',
+            './cc-test-reporter before-build',
+        ]));
+    }
+
+    public function runCoverageReporter()
+    {
+        $clover = file_exists('clover.xml');
+        $coverage = file_exists('coverage.xml');
+
+        if (!$clover && !$coverage) {
+            return 0; // No report to send
+        } elseif (!$clover && $coverage) {
+            copy('coverage.xml', 'clover.xml');
+        } elseif (!$coverage && $clover) {
+            copy('clover.xml', 'coverage.xml');
+        }
+
+        return $this->runShellCommand(implode(' && ', [
+            'bash <(curl -s https://codecov.io/bash)',
+            './cc-test-reporter after-build --coverage-input-type clover --exit-code $TRAVIS_TEST_RESULT',
+            'composer require codacy/coverage',
+            'vendor/bin/codacycoverage clover coverage.xml',
+        ]));
     }
 
     public function run(InputInterface $input = null, OutputInterface $output = null)
