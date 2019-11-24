@@ -2,8 +2,8 @@
 
 namespace Phug\Test\DevTool;
 
-use PHPUnit\Framework\TestCase;
 use Phug\DevTool\Application;
+use Phug\DevTool\TestCase;
 use RuntimeException;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Input\StringInput;
@@ -106,19 +106,20 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * @covers                   ::getShellCommandPath
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage The given command [vendor/bin/doNotExists] was not found
+     * @covers ::getShellCommandPath
      */
     public function testGetShellCommandPathException()
     {
-        if (method_exists(self::class, 'expectException')) {
-            self::expectException(RuntimeException::class);
-            self::expectExceptionMessage('The given command [vendor/bin/doNotExists] was not found');
+        $message = null;
+
+        try {
+            $app = new Application();
+            $app->runVendorCommand('doNotExists');
+        } catch (RuntimeException $exception) {
+            $message = $exception->getMessage();
         }
 
-        $app = new Application();
-        $app->runVendorCommand('doNotExists');
+        self::assertSame('The given command [vendor/bin/doNotExists] was not found', $message);
     }
 
     /**
@@ -145,7 +146,7 @@ class ApplicationTest extends TestCase
     public function testRunUnitTests()
     {
         $app = new Application();
-        self::expectOutputRegex('/^PHPUnit/');
+        self::expectOutputRegex('/^PHPUnit/m');
         $code = $app->runUnitTests(['--version']);
 
         self::assertSame(0, $code);
@@ -182,8 +183,9 @@ class ApplicationTest extends TestCase
         $buffer = new BufferedOutput();
         $app = new Application();
         $app->setAutoExit(false);
+        $status = $app->run($input, $buffer);
 
-        self::assertSame(0, $app->run($input, $buffer));
+        self::assertTrue($status === 0 || $status === 255);
         self::assertSame('Code looks great. Go on!', trim($buffer->fetch()));
     }
 }
