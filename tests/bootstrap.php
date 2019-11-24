@@ -2,8 +2,7 @@
 
 include __DIR__.'/../vendor/autoload.php';
 
-set_error_handler(function ($errno, $errstr, $errfile, $errline)
-{
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     switch ($errno) {
         case E_DEPRECATED:
         case E_USER_DEPRECATED:

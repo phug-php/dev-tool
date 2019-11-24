@@ -3,9 +3,7 @@
 namespace Phug\DevTool\Command;
 
 use Phug\DevTool\AbstractCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CoverageReportPrepareCommand extends AbstractCommand
