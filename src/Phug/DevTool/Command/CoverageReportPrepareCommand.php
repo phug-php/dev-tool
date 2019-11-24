@@ -3,29 +3,15 @@
 namespace Phug\DevTool\Command;
 
 use Phug\DevTool\AbstractCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CoverageReportCommand extends AbstractCommand
+class CoverageReportPrepareCommand extends AbstractCommand
 {
     protected function configure()
     {
-        $this->setName('coverage:report')
-            ->addArgument(
-                'input-file',
-                InputArgument::REQUIRED,
-                'The XML file to report coverage from'
-            )
-            ->addOption(
-                'php-version',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'If specified, the report is only sent for the given PHP version'
-            )
-            ->setDescription('Reports coverage.')
-            ->setHelp('This command reports coverage');
+        $this->setName('coverage:report:prepare')
+            ->setHelp('This command install the coverage report utils.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -47,6 +33,6 @@ class CoverageReportCommand extends AbstractCommand
             );
         }
 
-        return $this->getApplication()->runCoverageReporter();
+        return $this->getApplication()->runCoverageReporterPreparation();
     }
 }
