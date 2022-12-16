@@ -89,14 +89,14 @@ class CheckCommand extends AbstractCommand
         }
 
         if (($code = $app->runCommand('coverage:check', $output, [
-                'input-file' => $coverageFilePath,
-            ])) !== 0) {
+            'input-file' => $coverageFilePath,
+        ])) !== 0) {
             return $code;
         }
 
         if (($code = $app->runCommand('coverage:report', $output, [
-                'input-file' => $coverageFilePath,
-            ])) !== 0) {
+            'input-file' => $coverageFilePath,
+        ])) !== 0) {
             return $code;
         }
 
@@ -135,9 +135,9 @@ class CheckCommand extends AbstractCommand
         }
 
         if (version_compare(PHP_VERSION, '5.6.0') >= 0 && ($code = $app->runCommand('code-style:check', $output, [
-                '--no-interaction',
-                '--ignore-tests' => $input->getOption('ignore-tests'),
-            ])) !== 0) {
+            '--no-interaction',
+            '--ignore-tests' => $input->getOption('ignore-tests'),
+        ])) !== 0) {
             return $code;
         }
 
